@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthropic PBC — The Safety-Frontier Business Model (2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Custom Properties ──────────────────────────────────────────── */
+    :root {
+      --bg-primary:    #F5F2ED;
+      --text-primary:  #1A1A1A;
+      --accent-green:  #4A7C59;
+      /* #3d6649 used for 11px labels — WCAG AA compliant on --bg-primary (≈5.0:1) */
+      --accent-green-small: #3d6649;
+      --accent-orange: #C4622D;
+      --surface:       #FFFFFF;
+      --border:        #E0DDD8;
+
+      --max-width:     1200px;
+      --section-gap:   80px;
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+    }
+
+    /* ─── Typography Scale ───────────────────────────────────────────────── */
+
+    /* Page title: 48px, 700, charcoal, wide tracking */
+    .page-title {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+    }
+
+    /* Section titles: 28px, 600, charcoal */
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      line-height: 1.25;
+    }
+
+    /* Section subtitles */
+    .section-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+      opacity: 0.65;
+      letter-spacing: 0.02em;
+      margin-top: 8px;
+    }
+
+    /* Card headings: 16px, 600, uppercase, wide tracking */
+    .card-heading {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+    }
+
+    /* Labels / badges: 11px, uppercase, wide tracking */
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .label--green {
+      color: var(--accent-green-small);
+    }
+
+    .label--orange {
+      color: var(--accent-orange);
+    }
+
+    .label--charcoal {
+      color: var(--text-primary);
+    }
+
+    /* Body / bullet text */
+    .body-text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .body-text--green {
+      color: var(--accent-green);
+    }
+
+    /* ─── Layout ─────────────────────────────────────────────────────────── */
+    .page-wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─── Page Header ────────────────────────────────────────────────────── */
+    .page-header {
+      padding: 64px 0 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header__eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-green-small);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .page-header__meta {
+      font-size: 11px;
+      color: var(--text-primary);
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+      margin-top: 20px;
+    }
+
+    /* ─── Section Base ───────────────────────────────────────────────────── */
+    section {
+      padding: var(--section-gap) 0;
+    }
+
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    /* ─── Card Base ──────────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px;
+    }
+
+    /* ─── Divider ────────────────────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 16px 0;
+    }
+
+    /* ─── Bullet List ────────────────────────────────────────────────────── */
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .bullet-list li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .bullet-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+      font-weight: 600;
+    }
+
+    .bullet-list li strong {
+      font-weight: 600;
+    }
+
+    /* ─── Global Footer ──────────────────────────────────────────────────── */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0 40px;
+      text-align: center;
+    }
+
+    .page-footer__text {
+      font-size: 11px;
+      color: var(--text-primary);
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Section 1: Business Model Canvas ──────────────────────────────────── */
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, auto);
+      gap: 1px;
+      background-color: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .bmc-cell {
+      background: var(--surface);
+      padding: 24px;
+      min-height: 150px;
+    }
+
+    .bmc-cell .card-heading {
+      margin-bottom: 14px;
+    }
+
+    /* Grid placement — explicit per BMC layout */
+    .bmc-key-partners       { grid-column: 1;     grid-row: 1 / 3; }
+    .bmc-key-activities     { grid-column: 2;     grid-row: 1;     }
+    /* Value Propositions: center anchor, green inset border */
+    .bmc-value-props        { grid-column: 3;     grid-row: 1 / 4; box-shadow: inset 0 0 0 2px var(--accent-green); }
+    .bmc-cust-relationships { grid-column: 4;     grid-row: 1;     }
+    .bmc-cust-segments      { grid-column: 5;     grid-row: 1 / 3; }
+    .bmc-key-resources      { grid-column: 2;     grid-row: 2;     }
+    .bmc-channels           { grid-column: 4;     grid-row: 2;     }
+    .bmc-cost-structure     { grid-column: 1 / 3; grid-row: 3;     }
+    .bmc-revenue-streams    { grid-column: 4 / 6; grid-row: 3;     }
+
+    /* Tablet + mobile: collapse to stacked single column */
+    @media (max-width: 1023px) {
+      .bmc-grid {
+        grid-template-columns: 1fr;
+      }
+      .bmc-cell {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        min-height: auto;
+      }
+    }
+
+    /* ─── Section 2 & 3: 3-column card grids ─────────────────────────────── */
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background-color: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* Pathway & eval cards are flex columns so scale/badge sits at bottom */
+    .pathway-card,
+    .eval-card {
+      background: var(--surface);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ─── Innovation type label block ───────────────────────────────────── */
+    .innovation-type {
+      margin-bottom: 4px;
+    }
+
+    .innovation-subtext {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-primary);
+      opacity: 0.65;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* ─── BMC change rows (Section 2) ───────────────────────────────────── */
+    .bmc-changes {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+
+    .bmc-change-row {
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .bmc-change-row:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .bmc-change-block {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .bmc-change-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--accent-green);
+      margin: 0;
+    }
+
+    /* ─── Innovativeness Scale widget ───────────────────────────────────── */
+    .innovation-scale {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .scale-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .scale-track {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .scale-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+    }
+
+    .scale-dot--active {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .scale-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── Evaluation card fields (Section 3) ────────────────────────────── */
+    .eval-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+
+    .eval-field-row {
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .eval-field-row:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .eval-field-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      opacity: 0.55;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .eval-field-value {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    /* Risk row — ▲ triangle prefix in charcoal */
+    .risk-triangle {
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-right: 5px;
+      line-height: 1;
+      font-style: normal;
+    }
+
+    /* ─── Most Viable badge (Section 3, Card 3) ─────────────────────────── */
+    .most-viable-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--accent-green);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      line-height: 1.6;
+    }
+
+    /* padding-right to avoid badge overlapping heading on card 3 */
+    .eval-card--most-viable .card-heading {
+      padding-right: 110px;
+    }
+
+    /* ─── Recommendation quote (Section 3) ──────────────────────────────── */
+    .eval-recommendation {
+      text-align: center;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--accent-green);
+      margin-top: 40px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* ─── Responsive 3-col → 2-col → 1-col ──────────────────────────────── */
+    @media (max-width: 1023px) {
+      .card-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .card-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── Responsive: 768–1023px ─────────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      .page-wrapper {
+        padding: 0 24px;
+      }
+
+      .page-title {
+        font-size: 36px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+    }
+
+    /* ─── Section 4: Future Cone ────────────────────────────────────────── */
+    /* === Section 5: Tool Profile Cards === */
+    #responsible {
+      padding: 80px 0;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      #responsible {
+        padding: 48px 0;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #responsible {
+        padding: 32px 0;
+      }
+    }
+
+    .tool-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background-color: var(--border);
+      border: 1px solid var(--border);
+      align-items: stretch;
+    }
+
+    @media (max-width: 767px) {
+      .tool-card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tool-card {
+      background: var(--surface);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-card__icon {
+      display: block;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 767px) {
+      .tool-card__icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .tool-card__purpose {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-green-small);
+      margin-bottom: 20px;
+    }
+
+    .tool-reasoning-block {
+      padding: 14px 0;
+    }
+
+    .tool-reasoning-block:first-of-type {
+      padding-top: 0;
+    }
+
+    .tool-reasoning-block__label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent-green-small);
+      margin-bottom: 6px;
+    }
+
+    .tool-reasoning-block__dot {
+      font-size: 7px;
+      color: var(--accent-green);
+      flex-shrink: 0;
+    }
+
+    .tool-reasoning-block__body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .tool-card__footer-tag {
+      font-size: 11px;
+      font-style: italic;
+      color: var(--text-primary);
+      opacity: 0.5;
+      margin-top: auto;
+      padding-top: 20px;
+      line-height: 1.5;
+    }
+
+    .responsible-footer {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-primary);
+      opacity: 0.65;
+      text-align: center;
+      max-width: 640px;
+      margin: 48px auto 0;
+      line-height: 1.7;
+    }
+
+    /* === Section 4: Future Cone === */
+    .cone-wrapper {
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .cone-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Mobile fallback: hidden at ≥768px */
+    .cone-mobile-fallback {
+      display: none;
+      margin-bottom: 40px;
+    }
+
+    .cone-row {
+      padding: 16px 20px;
+      border-left: 4px solid var(--border);
+      background: transparent;
+      margin-bottom: 8px;
+    }
+
+    .cone-row--plausible {
+      background: rgba(224, 221, 216, 0.15);
+    }
+
+    .cone-row--preferable {
+      border-left-color: var(--accent-green);
+      background: rgba(74, 124, 89, 0.05);
+    }
+
+    .cone-row__label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .cone-row--preferable .cone-row__label {
+      color: var(--accent-green-small);
+    }
+
+    .cone-row__title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .cone-row--preferable .cone-row__title,
+    .cone-row--preferable .cone-row__desc {
+      color: var(--accent-green);
+    }
+
+    .cone-row__desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      opacity: 0.75;
+    }
+
+    /* ─── Section 4: 2-column card grid ─────────────────────────────────── */
+    .card-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background-color: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* Foresight cards — flex column so narrative link can sit at bottom */
+    .foresight-card {
+      background: var(--surface);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Decision rows (left card) */
+    .foresight-decision {
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .foresight-decision:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .foresight-decision__label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-green-small);
+      margin-bottom: 4px;
+    }
+
+    .foresight-decision__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .foresight-decision__body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .foresight-narrative-link {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--text-primary);
+      opacity: 0.6;
+      margin-top: auto;
+      padding-top: 20px;
+      line-height: 1.6;
+    }
+
+    /* Risk row (right card) — uses orange */
+    .foresight-risk {
+      padding-bottom: 14px;
+    }
+
+    .foresight-risk__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-orange);
+      margin-bottom: 6px;
+    }
+
+    .foresight-risk__triangle {
+      font-size: 12px;
+      color: var(--accent-orange);
+      margin-right: 4px;
+      font-style: normal;
+    }
+
+    .foresight-risk__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .foresight-risk__body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    /* Mitigation rows (right card) — use green ● */
+    .foresight-mitigation {
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .foresight-mitigation__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent-green-small);
+      margin-bottom: 6px;
+    }
+
+    .foresight-mitigation__dot {
+      font-size: 7px;
+      color: var(--accent-green);
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .foresight-mitigation__body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    /* ─── Section 4 Responsive ───────────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      /* 2-col foresight action cards collapse to 1-col at tablet */
+      .card-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 767px) {
+      /* Swap SVG for text fallback rows */
+      .cone-wrapper {
+        display: none;
+      }
+      .cone-mobile-fallback {
+        display: block;
+      }
+    }
+
+    /* ─── Responsive: <768px ─────────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .page-wrapper {
+        padding: 0 16px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .page-header {
+        padding: 40px 0 36px;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .section-header {
+        margin-bottom: 32px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ═══ PAGE HEADER ═══════════════════════════════════════════════════════ -->
+  <div class="page-wrapper">
+    <header class="page-header">
+      <p class="page-header__eyebrow">Business Model Analysis · April 2026</p>
+      <h1 class="page-title">Anthropic PBC</h1>
+      <p class="page-header__meta">Public Benefit Corporation · San Francisco, CA · Est. 2021</p>
+    </header>
+  </div>
+
+  <!-- ═══ SECTION 1: BUSINESS MODEL CANVAS ══════════════════════════════════ -->
+  <section id="canvas">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">Anthropic PBC — The Safety-Frontier Business Model (2026)</h2>
+      </div>
+      <div class="bmc-grid">
+
+        <!-- Key Partners: col 1, rows 1–2 -->
+        <article class="bmc-cell bmc-key-partners">
+          <h3 class="card-heading">Key Partners</h3>
+          <ul class="bullet-list">
+            <li><strong>Cloud/Compute Giants:</strong> Amazon (AWS), Google, and $30B Microsoft Azure deal</li>
+            <li><strong>Data Partners:</strong> Snowflake, Databricks, and Quora (Poe)</li>
+            <li><strong>Long-Term Benefit Trust:</strong> independent board election for mission alignment</li>
+          </ul>
+        </article>
+
+        <!-- Key Activities: col 2, row 1 -->
+        <article class="bmc-cell bmc-key-activities">
+          <h3 class="card-heading">Key Activities</h3>
+          <ul class="bullet-list">
+            <li><strong>Alignment Science:</strong> interpretability research and Dictionary Learning</li>
+            <li><strong>Safety Governance:</strong> red-teaming and the Responsible Scaling Policy</li>
+            <li><strong>Frontier Engineering:</strong> training/scaling Claude 4.6 and autonomous agent tools</li>
+          </ul>
+        </article>
+
+        <!-- Value Propositions: col 3, rows 1–3 (green border anchor) -->
+        <article class="bmc-cell bmc-value-props">
+          <h3 class="card-heading">Value Propositions</h3>
+          <ul class="bullet-list">
+            <li><strong>Safety-Frontier AI:</strong> &ldquo;Helpful, Harmless, and Honest&rdquo; models (Claude 4 series)</li>
+            <li><strong>&ldquo;Space to Think&rdquo;:</strong> purely ad-free, distraction-free environment</li>
+            <li><strong>Multidimensional Value:</strong> Public Benefit Corporation serving humanity&rsquo;s long-term well-being</li>
+          </ul>
+        </article>
+
+        <!-- Customer Relationships: col 4, row 1 -->
+        <article class="bmc-cell bmc-cust-relationships">
+          <h3 class="card-heading">Customer Relationships</h3>
+          <ul class="bullet-list">
+            <li><strong>Trust-Driven:</strong> structural safety via Constitutional AI</li>
+            <li><strong>Platform Co-Creation:</strong> developer conferences and the &ldquo;Labs&rdquo; division</li>
+            <li><strong>High-Touch Alliances:</strong> technical advisory boards for Higher Ed and Government</li>
+          </ul>
+        </article>
+
+        <!-- Customer Segments: col 5, rows 1–2 -->
+        <article class="bmc-cell bmc-cust-segments">
+          <h3 class="card-heading">Customer Segments</h3>
+          <ul class="bullet-list">
+            <li><strong>Individual Professionals:</strong> knowledge workers and privacy-conscious users</li>
+            <li><strong>Technical Builders:</strong> developers using Claude Code, API, and MCP</li>
+            <li><strong>High-Trust Institutions:</strong> U.S. National Security (Claude Gov) and educational bodies</li>
+            <li><strong>Global Enterprises:</strong> data-heavy businesses via AWS, Google, and Snowflake</li>
+          </ul>
+        </article>
+
+        <!-- Key Resources: col 2, row 2 -->
+        <article class="bmc-cell bmc-key-resources">
+          <h3 class="card-heading">Key Resources</h3>
+          <ul class="bullet-list">
+            <li><strong>Core AI Assets:</strong> proprietary weights and Constitutional AI IP</li>
+            <li><strong>Massive Compute:</strong> 1GW+ capacity via Google TPUs and AWS Trainium</li>
+            <li><strong>Human Capital:</strong> elite safety researchers and policy experts</li>
+          </ul>
+        </article>
+
+        <!-- Channels: col 4, row 2 -->
+        <article class="bmc-cell bmc-channels">
+          <h3 class="card-heading">Channels</h3>
+          <ul class="bullet-list">
+            <li><strong>Direct Access:</strong> Claude.ai, iOS/Desktop apps, Anthropic API</li>
+            <li><strong>Cloud Alliances:</strong> Amazon Bedrock, Google Cloud TPU clusters</li>
+            <li><strong>Strategic Distribution:</strong> Palantir (Defense), Snowflake, Databricks</li>
+            <li><strong>Brand Awareness:</strong> Super Bowl &ldquo;A Time and a Place&rdquo; campaigns</li>
+          </ul>
+        </article>
+
+        <!-- Cost Structure: cols 1–2, row 3 -->
+        <article class="bmc-cell bmc-cost-structure">
+          <h3 class="card-heading">Cost Structure</h3>
+          <ul class="bullet-list">
+            <li><strong>Compute-Heavy:</strong> largest cost driver; training cycles on massive GPU clusters</li>
+            <li><strong>Elite Research Talent:</strong> top-tier compensation for AI alignment specialists</li>
+            <li><strong>Legal &amp; Compliance:</strong> data acquisition costs and $1.5B copyright settlements</li>
+          </ul>
+        </article>
+
+        <!-- Revenue Streams: cols 4–5, row 3 -->
+        <article class="bmc-cell bmc-revenue-streams">
+          <h3 class="card-heading">Revenue Streams</h3>
+          <ul class="bullet-list">
+            <li><strong>Diversified Engine:</strong> reported $9B in 2025</li>
+            <li><strong>Model Monetization:</strong> direct B2C/B2B subscriptions and usage-based API fees</li>
+            <li><strong>Platform Licensing:</strong> multi-year deals (e.g., $200M Snowflake deal)</li>
+            <li><strong>Public Sector:</strong> high-value defense contracts ($200M DoD contract)</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 2: STRATEGIC INNOVATION PATHWAYS ══════════════════════════ -->
+  <section id="pathways">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">Strategic Innovation Pathways (2026)</h2>
+      </div>
+      <div class="card-grid-3">
+
+        <!-- Card 1: Verified Agentic Solution -->
+        <article class="pathway-card">
+          <p class="label label--charcoal innovation-type">Deepening</p>
+          <p class="innovation-subtext">Leveraging existing safety research for premium B2B value</p>
+          <h3 class="card-heading" style="margin-bottom: 16px;">Verified Agentic Solution</h3>
+          <div class="bmc-changes">
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Value Proposition</span>
+              <p class="bmc-change-text">Shifts from &ldquo;Helpful Assistant&rdquo; &rarr; &ldquo;Explainable Agency.&rdquo; Autonomous agents pre-certified for high-stakes compliance via Dictionary Learning.</p>
+            </div>
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Key Activities</span>
+              <p class="bmc-change-text">Introduces Digital Provenance — verifiable audit trails for every autonomous action.</p>
+            </div>
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Customer Segments</span>
+              <p class="bmc-change-text">Targets High-Stakes Enterprises (Healthcare, Finance) restricted by current AI &ldquo;black box&rdquo; limitations.</p>
+            </div>
+          </div>
+          <!-- Scale: middle dot active -->
+          <div class="innovation-scale" aria-label="Innovativeness: Innovative (middle)">
+            <span class="scale-label">Mimetic</span>
+            <div class="scale-track">
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot scale-dot--active"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot"></span>
+            </div>
+            <span class="scale-label">New to the World</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Governance-as-a-Service (GaaS) -->
+        <article class="pathway-card">
+          <p class="label label--charcoal innovation-type">Adding</p>
+          <p class="innovation-subtext">Introducing a multisided platform layer</p>
+          <h3 class="card-heading" style="margin-bottom: 16px;">Governance-as-a-Service (GaaS)</h3>
+          <div class="bmc-changes">
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Revenue Streams</span>
+              <p class="bmc-change-text">Introduces IP Licensing Fees — monetizes Constitutional AI framework by selling safety guardrails to other developers.</p>
+            </div>
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Customer Segments</span>
+              <p class="bmc-change-text">Expands to AI Developers and National Regulators seeking a standardized &ldquo;Safety OS.&rdquo;</p>
+            </div>
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Key Partners</span>
+              <p class="bmc-change-text">Pivots toward Global Standards Bodies and security agencies to co-author deployment ethics.</p>
+            </div>
+          </div>
+          <!-- Scale: right dot active -->
+          <div class="innovation-scale" aria-label="Innovativeness: New to the World (right)">
+            <span class="scale-label">Mimetic</span>
+            <div class="scale-track">
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot scale-dot--active"></span>
+            </div>
+            <span class="scale-label">New to the World</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Outcome-Based Agentic Workforce -->
+        <article class="pathway-card">
+          <p class="label label--charcoal innovation-type">Hybridization</p>
+          <p class="innovation-subtext">Merging product performance with new financial logic</p>
+          <h3 class="card-heading" style="margin-bottom: 16px;">Outcome-Based &ldquo;Agentic Workforce&rdquo;</h3>
+          <div class="bmc-changes">
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Revenue Model</span>
+              <p class="bmc-change-text">Substitutes subscriptions for Outcome-Based Economics — charges per &ldquo;successful mission&rdquo; (e.g., $0.99/resolved ticket).</p>
+            </div>
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Value Proposition</span>
+              <p class="bmc-change-text">Modifies &ldquo;Space to Think&rdquo; &rarr; &ldquo;Space to Act.&rdquo; Claude becomes an &ldquo;Invisible Workforce&rdquo; for back-office automation.</p>
+            </div>
+            <div class="bmc-change-row">
+              <span class="bmc-change-block">Customer Relationships</span>
+              <p class="bmc-change-text">Evolves into Results-Oriented Partnerships — Anthropic shares operational risk of AI performance.</p>
+            </div>
+          </div>
+          <!-- Scale: middle dot active -->
+          <div class="innovation-scale" aria-label="Innovativeness: Innovative / Hybrid (middle)">
+            <span class="scale-label">Mimetic</span>
+            <div class="scale-track">
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot scale-dot--active"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot"></span>
+            </div>
+            <span class="scale-label">New to the World</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 3: STRATEGIC EVALUATION MATRIX ════════════════════════════ -->
+  <section id="evaluation">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">Strategic Evaluation &amp; Risk Analysis (2026)</h2>
+        <p class="section-subtitle">Assessing pathway innovativeness against the original PBC model</p>
+      </div>
+      <div class="card-grid-3">
+
+        <!-- Assessment Card 1: Verified Agentic Solution -->
+        <article class="eval-card">
+          <h3 class="card-heading" style="margin-bottom: 16px;">Verified Agentic Solution</h3>
+          <div class="eval-fields">
+            <div class="eval-field-row">
+              <span class="eval-field-label">Level</span>
+              <p class="eval-field-value">Innovative</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">BMC Comparison</span>
+              <p class="eval-field-value">Pivots Value Proposition from &ldquo;Assistant&rdquo; &rarr; &ldquo;Explainable Agent&rdquo;</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">Core Reasoning</span>
+              <p class="eval-field-value">Leverages unique Dictionary Learning assets to solve the enterprise &ldquo;Black Box&rdquo; problem</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">Primary Risk</span>
+              <p class="eval-field-value"><span class="risk-triangle" aria-hidden="true">&#9650;</span>Technical Complexity — high cost of providing a &ldquo;Digital Provenance&rdquo; audit trail</p>
+            </div>
+          </div>
+          <!-- Scale: middle dot active -->
+          <div class="innovation-scale" aria-label="Innovativeness: Innovative (middle)">
+            <span class="scale-label">Mimetic</span>
+            <div class="scale-track">
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot scale-dot--active"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot"></span>
+            </div>
+            <span class="scale-label">New to the World</span>
+          </div>
+        </article>
+
+        <!-- Assessment Card 2: Governance-as-a-Service (GaaS) -->
+        <article class="eval-card">
+          <h3 class="card-heading" style="margin-bottom: 16px;">Governance-as-a-Service (GaaS)</h3>
+          <div class="eval-fields">
+            <div class="eval-field-row">
+              <span class="eval-field-label">Level</span>
+              <p class="eval-field-value">New to the World</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">BMC Comparison</span>
+              <p class="eval-field-value">Introduces new Customer Segments (Regulators/Developers) and Revenue Streams (IP Licensing)</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">Core Reasoning</span>
+              <p class="eval-field-value">Positions Anthropic as the &ldquo;Safety OS&rdquo; for the entire AI ecosystem — not just a model provider</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">Primary Risk</span>
+              <p class="eval-field-value"><span class="risk-triangle" aria-hidden="true">&#9650;</span>Agentic Gridlock — industry players may resist adopting a third-party&rsquo;s &ldquo;Constitution&rdquo; as standard</p>
+            </div>
+          </div>
+          <!-- Scale: right dot active -->
+          <div class="innovation-scale" aria-label="Innovativeness: New to the World (right)">
+            <span class="scale-label">Mimetic</span>
+            <div class="scale-track">
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot scale-dot--active"></span>
+            </div>
+            <span class="scale-label">New to the World</span>
+          </div>
+        </article>
+
+        <!-- Assessment Card 3: Outcome-Based Agentic Workforce — MOST VIABLE -->
+        <article class="eval-card eval-card--most-viable">
+          <span class="most-viable-badge" aria-label="Most Viable pathway">Most Viable</span>
+          <h3 class="card-heading" style="margin-bottom: 16px;">Outcome-Based &ldquo;Agentic Workforce&rdquo;</h3>
+          <div class="eval-fields">
+            <div class="eval-field-row">
+              <span class="eval-field-label">Level</span>
+              <p class="eval-field-value">Innovative / Hybrid</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">BMC Comparison</span>
+              <p class="eval-field-value">Substitutes traditional subscriptions for Outcome-Based Economics</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">Core Reasoning</span>
+              <p class="eval-field-value">Addresses 2026 market demand for Hard ROI by charging per &ldquo;Successful Mission&rdquo;</p>
+            </div>
+            <div class="eval-field-row">
+              <span class="eval-field-label">Primary Risk</span>
+              <p class="eval-field-value"><span class="risk-triangle" aria-hidden="true">&#9650;</span>Fragility of Autonomy — liability for &ldquo;action hallucinations&rdquo; in high-stakes workflows</p>
+            </div>
+          </div>
+          <!-- Scale: middle dot active -->
+          <div class="innovation-scale" aria-label="Innovativeness: Innovative / Hybrid (middle)">
+            <span class="scale-label">Mimetic</span>
+            <div class="scale-track">
+              <span class="scale-dot"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot scale-dot--active"></span>
+              <span class="scale-line"></span>
+              <span class="scale-dot"></span>
+            </div>
+            <span class="scale-label">New to the World</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Recommendation quote -->
+      <p class="eval-recommendation">
+        &ldquo;Tying revenue to results solves the Trust Gap and aligns value capture with the actual labor provided by AI agents.&rdquo;
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 4: STRATEGIC FORESIGHT ════════════════════════════════════ -->
+  <section id="foresight">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">Strategic Foresight – Designing for the Agentic Future</h2>
+        <p class="section-subtitle">A scenario-based view from 2026 to 2035</p>
+      </div>
+      <!-- ── Future Cone SVG (≥768px) ── -->
+      <div class="cone-wrapper" role="img" aria-label="Future Cone: 2026 to 2035 scenario landscape">
+        <svg class="cone-svg" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Band fills -->
+          <!-- Plausible middle band -->
+          <polygon points="40,165 1160,115 1160,215" fill="#E0DDD840"/>
+          <!-- Preferable bottom band -->
+          <polygon points="40,165 1160,215 1160,315" fill="#4A7C5912"/>
+
+          <!-- Band divider lines from apex -->
+          <line x1="40" y1="165" x2="1160" y2="115" stroke="#E0DDD8" stroke-width="1"/>
+          <line x1="40" y1="165" x2="1160" y2="215" stroke="#E0DDD8" stroke-width="1"/>
+
+          <!-- Cone outline -->
+          <polygon points="40,165 1160,15 1160,315" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+
+          <!-- ▶ apex marker + Now label -->
+          <text x="19" y="170" font-size="13" fill="#1A1A1A" font-family="DM Sans, system-ui" aria-hidden="true">&#9654;</text>
+          <text x="58" y="179" font-size="9.5" fill="#1A1A1A" font-family="DM Sans, system-ui" font-weight="600" letter-spacing="0.06em">NOW</text>
+
+          <!-- Future label at right edge -->
+          <text x="1158" y="10" font-size="9.5" fill="#1A1A1A" font-family="DM Sans, system-ui" font-weight="600" letter-spacing="0.06em" text-anchor="end">FUTURE (2035)</text>
+
+          <!-- ── PROBABLE FUTURE (top band) — rotated to follow band angle ── -->
+          <g transform="rotate(-5.1, 40, 165)">
+            <text x="390" y="168" font-family="DM Sans, system-ui" font-size="9" font-weight="700"
+                  fill="#1A1A1A" letter-spacing="1.2">PROBABLE FUTURE — 2026</text>
+            <text x="640" y="160" font-family="DM Sans, system-ui" font-size="12.5" font-weight="700"
+                  fill="#1A1A1A">&#8220;The Digital Coworker&#8221;</text>
+            <text x="640" y="176" font-family="DM Sans, system-ui" font-size="9.5"
+                  fill="#1A1A1A" fill-opacity="0.72">AI evolves from simple instrument into a partner automating multi-step processes</text>
+          </g>
+
+          <!-- ── PLAUSIBLE FUTURE (middle band) — horizontal centre-line ── -->
+          <text x="390" y="168" font-family="DM Sans, system-ui" font-size="9" font-weight="700"
+                fill="#1A1A1A" letter-spacing="1.2">PLAUSIBLE FUTURE — 2028</text>
+          <text x="640" y="160" font-family="DM Sans, system-ui" font-size="12.5" font-weight="700"
+                fill="#1A1A1A">&#8220;The Trust Crisis&#8221;</text>
+          <text x="640" y="176" font-family="DM Sans, system-ui" font-size="9.5"
+                fill="#1A1A1A" fill-opacity="0.72">Agentic loops trigger accountability crisis &#8212; only 1 in 3 consumers trust AI to act for them</text>
+
+          <!-- ── PREFERABLE FUTURE (bottom band) — rotated to follow band angle ── -->
+          <g transform="rotate(5.1, 40, 165)">
+            <text x="390" y="168" font-family="DM Sans, system-ui" font-size="9" font-weight="700"
+                  fill="#4A7C59" letter-spacing="1.2">PREFERABLE FUTURE &#8212; OUR GOAL</text>
+            <text x="640" y="160" font-family="DM Sans, system-ui" font-size="12.5" font-weight="700"
+                  fill="#4A7C59">&#8220;The Outcome Economy&#8221;</text>
+            <text x="640" y="176" font-family="DM Sans, system-ui" font-size="9.5"
+                  fill="#4A7C59" fill-opacity="0.88">AI as reliable &#8220;Invisible Workforce&#8221; &#8212; companies pay only for measurable, successful results</text>
+          </g>
+
+          <!-- Timeline axis -->
+          <line x1="40" y1="332" x2="1160" y2="332" stroke="#1A1A1A" stroke-width="1"/>
+          <!-- Tick marks -->
+          <line x1="40"   y1="330" x2="40"   y2="337" stroke="#1A1A1A" stroke-width="1"/>
+          <line x1="600"  y1="330" x2="600"  y2="337" stroke="#1A1A1A" stroke-width="1"/>
+          <line x1="1160" y1="330" x2="1160" y2="337" stroke="#1A1A1A" stroke-width="1"/>
+          <!-- Tick labels -->
+          <text x="40"   y="352" font-family="DM Sans, system-ui" font-size="10" fill="#1A1A1A" fill-opacity="0.65" text-anchor="middle" letter-spacing="0.05em">2026</text>
+          <text x="600"  y="352" font-family="DM Sans, system-ui" font-size="10" fill="#1A1A1A" fill-opacity="0.65" text-anchor="middle" letter-spacing="0.05em">2028</text>
+          <text x="1160" y="352" font-family="DM Sans, system-ui" font-size="10" fill="#1A1A1A" fill-opacity="0.65" text-anchor="middle" letter-spacing="0.05em">2035</text>
+
+        </svg>
+      </div>
+
+      <!-- ── Mobile Cone Fallback (<768px) ── -->
+      <div class="cone-mobile-fallback" aria-label="Future Cone: scenario overview">
+        <div class="cone-row cone-row--probable">
+          <span class="cone-row__label">Probable Future — 2026</span>
+          <p class="cone-row__title">&ldquo;The Digital Coworker&rdquo;</p>
+          <p class="cone-row__desc">AI evolves from a simple instrument into a partner that automates dynamic, multi-step processes.</p>
+        </div>
+        <div class="cone-row cone-row--plausible">
+          <span class="cone-row__label">Plausible Future — 2028</span>
+          <p class="cone-row__title">&ldquo;The Trust Crisis&rdquo;</p>
+          <p class="cone-row__desc">Unsupervised agentic loops lead to an accountability crisis; only 1 in 3 consumers currently trust AI to act in their best interest.</p>
+        </div>
+        <div class="cone-row cone-row--preferable">
+          <span class="cone-row__label">Preferable Future — Our Goal</span>
+          <p class="cone-row__title">&ldquo;The Outcome Economy&rdquo;</p>
+          <p class="cone-row__desc">AI as a reliable &ldquo;Invisible Workforce&rdquo;; companies pay only for measurable, successful results.</p>
+        </div>
+      </div>
+
+      <!-- ── Bottom Pane: Two Action Cards ── -->
+      <div class="card-grid-2">
+
+        <!-- Left Card: Scenario-Informed Redesign -->
+        <article class="foresight-card">
+          <h3 class="card-heading" style="margin-bottom: 20px;">From &ldquo;Talk&rdquo; to &ldquo;Task&rdquo;</h3>
+
+          <div class="foresight-decision">
+            <span class="foresight-decision__label">Decision 1</span>
+            <p class="foresight-decision__title">Outcome-Based Economics</p>
+            <p class="foresight-decision__body">Shifted from seat-based SaaS because agents decouple output from human headcount. Revenue model now charges per &ldquo;Successful Mission&rdquo; &mdash; e.g., ticket resolved, contract drafted.</p>
+          </div>
+
+          <div class="foresight-decision">
+            <span class="foresight-decision__label">Decision 2</span>
+            <p class="foresight-decision__title">Digital Provenance Integration</p>
+            <p class="foresight-decision__body">To close the &ldquo;Trust Gap,&rdquo; verifiable audit trails are added to core model activities &mdash; ensuring every autonomous action is explainable and audit-ready.</p>
+          </div>
+
+          <p class="foresight-narrative-link">
+            &ldquo;Justified by the Preferable Future scenario above &mdash; see Slide 3 recommendation.&rdquo;
+          </p>
+        </article>
+
+        <!-- Right Card: Risks & Mitigation -->
+        <article class="foresight-card">
+          <h3 class="card-heading" style="margin-bottom: 20px;">Guarding Autonomy</h3>
+
+          <div class="foresight-risk">
+            <p class="foresight-risk__label">
+              <span class="foresight-risk__triangle" aria-hidden="true">&#9650;</span>
+              Primary Risk
+            </p>
+            <p class="foresight-risk__title">Fragility of Autonomy</p>
+            <p class="foresight-risk__body">Autonomous agents are vulnerable to &ldquo;action hallucinations&rdquo; &mdash; an incorrect sequence of steps can cause real-world operational or financial damage.</p>
+          </div>
+
+          <div class="foresight-mitigation">
+            <p class="foresight-mitigation__label">
+              <span class="foresight-mitigation__dot" aria-hidden="true">&#9679;</span>
+              Mitigation 1 &mdash; Human-in-the-Loop
+            </p>
+            <p class="foresight-mitigation__body">Mandatory safety checkpoints for high-consequence actions (e.g., mass communications or financial transfers) requiring human sign-off before execution.</p>
+          </div>
+
+          <div class="foresight-mitigation">
+            <p class="foresight-mitigation__label">
+              <span class="foresight-mitigation__dot" aria-hidden="true">&#9679;</span>
+              Mitigation 2 &mdash; Regulatory Sandboxes
+            </p>
+            <p class="foresight-mitigation__body">All agentic workflows tested in isolated environments before production to prevent cascading errors.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 5: SUSTAINABLE & RESPONSIBLE STRATEGIC DESIGN ════════════ -->
+  <section id="responsible">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">Sustainable &amp; Responsible Strategic Design</h2>
+        <p class="section-subtitle">The frameworks behind multidimensional value creation</p>
+      </div>
+      <div class="tool-card-grid">
+
+        <!-- Left Card: Triple Layered Business Model Canvas (TLBMC) -->
+        <article class="tool-card">
+
+          <!-- SVG icon: 3 stacked squares, each offset 4px down+right, 1px charcoal stroke -->
+          <svg class="tool-card__icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <!-- Back square -->
+            <rect x="8" y="8" width="36" height="36" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+            <!-- Middle square -->
+            <rect x="4" y="4" width="36" height="36" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+            <!-- Front square -->
+            <rect x="0" y="0" width="36" height="36" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+          </svg>
+
+          <h3 class="card-heading" style="margin-bottom: 8px;">Triple Layered Business Model Canvas</h3>
+          <p class="tool-card__purpose">Economic &middot; Environmental &middot; Social</p>
+
+          <div class="tool-reasoning-block">
+            <p class="tool-reasoning-block__label">
+              <span class="tool-reasoning-block__dot" aria-hidden="true">&#9679;</span>
+              Environmental Accountability
+            </p>
+            <p class="tool-reasoning-block__body">Essential for managing the AI-Energy Nexus. Training frontier models requires gigawatts of compute &mdash; this tool maps electricity and water usage directly against economic goals, making environmental cost visible inside the business model.</p>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="tool-reasoning-block">
+            <p class="tool-reasoning-block__label">
+              <span class="tool-reasoning-block__dot" aria-hidden="true">&#9679;</span>
+              Multidimensional Reporting
+            </p>
+            <p class="tool-reasoning-block__body">As a Public Benefit Corporation, Anthropic must account for social benefits beyond revenue. The TLBMC provides a dedicated layer to track how &ldquo;Alignment Science&rdquo; creates value for society and regulators.</p>
+          </div>
+
+          <p class="tool-card__footer-tag">Applies to: AI-Energy Nexus &middot; PBC Compliance &middot; Frontier Engineering</p>
+
+        </article>
+
+        <!-- Right Card: Flourishing Business Canvas (FBC) -->
+        <article class="tool-card">
+
+          <!-- SVG icon: outer circle (r=20) + inner circle (r=10) + leaf path, centered at (24,24) -->
+          <svg class="tool-card__icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <!-- Outer circle: 40px diameter -->
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+            <!-- Inner circle: 20px diameter -->
+            <circle cx="24" cy="24" r="10" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+            <!-- Leaf: two bezier curves forming a pointed oval inside the inner circle -->
+            <path d="M24,16 C29,19 29,29 24,32 C19,29 19,19 24,16 Z" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+          </svg>
+
+          <h3 class="card-heading" style="margin-bottom: 8px;">Flourishing Business Canvas</h3>
+          <p class="tool-card__purpose">Purpose &middot; Ecosystem &middot; Flourishing</p>
+
+          <div class="tool-reasoning-block">
+            <p class="tool-reasoning-block__label">
+              <span class="tool-reasoning-block__dot" aria-hidden="true">&#9679;</span>
+              Purpose-Centric Design
+            </p>
+            <p class="tool-reasoning-block__body">Unlike standard canvases, this tool places Purpose at the center &mdash; ensuring the &ldquo;Outcome-Based Agentic Workforce&rdquo; model stays aligned with Anthropic&rsquo;s legal mission to serve humanity&rsquo;s long-term well-being, not just quarterly revenue targets.</p>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="tool-reasoning-block">
+            <p class="tool-reasoning-block__label">
+              <span class="tool-reasoning-block__dot" aria-hidden="true">&#9679;</span>
+              Ecosystem Orchestration
+            </p>
+            <p class="tool-reasoning-block__body">The &ldquo;Ecosystem Actors&rdquo; block is critical for designing the Governance-as-a-Service pathway &mdash; allowing Anthropic to involve regulators and partners (Palantir, AWS) in the co-creation of safety standards rather than imposing them unilaterally.</p>
+          </div>
+
+          <p class="tool-card__footer-tag">Applies to: GaaS Pathway &middot; Agentic Workforce &middot; PBC Mission</p>
+
+        </article>
+
+      </div>
+
+      <!-- Section 5 Strategic Alignment Footer -->
+      <p class="responsible-footer">
+        &ldquo;Moving from profit-only modeling to a multidimensional value system that protects the integrity of human-AI interaction.&rdquo;
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ GLOBAL FOOTER ═════════════════════════════════════════════════════ -->
+  <footer class="page-footer">
+    <div class="page-wrapper">
+      <p class="page-footer__text">
+        "Evaluation based on the 2026 shift from AI evangelism to rigorous utility measurement."
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
