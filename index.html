@@ -837,6 +837,144 @@
       }
     }
 
+    /* ─── Section 6: Triple Layered Business Model Canvas (TLBMC) ──────── */
+
+    /* Layer wrapper — full-width stacked block */
+    .tlbmc-layer {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 1px;
+    }
+
+    .tlbmc-layer:last-of-type {
+      margin-bottom: 0;
+    }
+
+    /* Layer banner — coloured header bar above each grid */
+    .tlbmc-layer__banner {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+
+    .tlbmc-layer__name {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-primary);
+    }
+
+    .tlbmc-layer__name--economic { color: var(--accent-green-small); }
+    .tlbmc-layer__name--environ  { color: #5a7a5a; }
+    .tlbmc-layer__name--social   { color: var(--text-primary); }
+
+    .tlbmc-layer__pestle-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    /* PESTLE tag badge — small grey pill */
+    .pestle-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      opacity: 0.45;
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 99px;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    /* 4-column block grid inside each layer */
+    .tlbmc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background-color: var(--border);
+    }
+
+    @media (max-width: 1023px) {
+      .tlbmc-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 767px) {
+      .tlbmc-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Each block cell */
+    .tlbmc-cell {
+      background: var(--surface);
+      padding: 20px 22px;
+      position: relative;
+      min-height: 130px;
+    }
+
+    .tlbmc-cell__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-primary);
+      opacity: 0.55;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .tlbmc-cell__heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .tlbmc-cell__heading--green {
+      color: var(--accent-green);
+    }
+
+    .tlbmc-cell__body {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      opacity: 0.8;
+    }
+
+    /* PESTLE tag anchored to top-right of each cell */
+    .tlbmc-cell__tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      opacity: 0.4;
+    }
+
+    /* "Most Innovated" green inset border — reuses the BMC value-prop pattern */
+    .tlbmc-cell--highlight {
+      box-shadow: inset 0 0 0 2px var(--accent-green);
+    }
+
+    /* Slide 6 closing quote — mirrors .eval-recommendation */
+    .tlbmc-footer-quote {
+      text-align: center;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--accent-green);
+      margin-top: 40px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
   </style>
 </head>
 <body>
@@ -1430,6 +1568,160 @@
       <!-- Section 5 Strategic Alignment Footer -->
       <p class="responsible-footer">
         &ldquo;Moving from profit-only modeling to a multidimensional value system that protects the integrity of human-AI interaction.&rdquo;
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 6: TLBMC — THE RESPONSIBLE AGENT MODEL ══════════════════ -->
+  <section id="tlbmc">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <p class="page-header__eyebrow">TLBMC &middot; Socio-Technical Blueprint</p>
+        <h2 class="section-title">The &ldquo;Responsible Agent&rdquo; Model</h2>
+        <p class="section-subtitle">Triple Layered Business Model Canvas &mdash; Economic &middot; Environmental &middot; Social</p>
+      </div>
+
+      <!-- ── Layer 1: Economic ──────────────────────────────────────────── -->
+      <div class="tlbmc-layer">
+        <div class="tlbmc-layer__banner">
+          <span class="tlbmc-layer__name tlbmc-layer__name--economic">L1 &mdash; Economic Layer</span>
+          <div class="tlbmc-layer__pestle-group" aria-label="PESTLE dimensions covered">
+            <span class="pestle-tag">Eco</span>
+            <span class="pestle-tag">Pol</span>
+            <span class="pestle-tag">Tech</span>
+          </div>
+        </div>
+        <div class="tlbmc-grid">
+
+          <!-- Value Proposition — highlighted: Digital Provenance is most innovated -->
+          <article class="tlbmc-cell tlbmc-cell--highlight">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Technology">Tech</span>
+            <span class="tlbmc-cell__label">Value Proposition</span>
+            <p class="tlbmc-cell__heading tlbmc-cell__heading--green">Explainable Autonomous Action</p>
+            <p class="tlbmc-cell__body">High-performance agentic workflows (Claude 4) with guaranteed <strong>Digital Provenance</strong> &mdash; a verifiable audit trail for every autonomous decision.</p>
+          </article>
+
+          <!-- Customer Segments -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Economic">Eco</span>
+            <span class="tlbmc-cell__label">Customer Segments</span>
+            <p class="tlbmc-cell__heading">High-Trust B2B &amp; National Security</p>
+            <p class="tlbmc-cell__body">Finance and Healthcare enterprises restricted by &ldquo;black box&rdquo; limitations, plus U.S. national security agencies via Claude Gov.</p>
+          </article>
+
+          <!-- Revenue Streams — highlighted: Outcome-Based Economics is most innovated -->
+          <article class="tlbmc-cell tlbmc-cell--highlight">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Economic">Eco</span>
+            <span class="tlbmc-cell__label">Revenue Streams</span>
+            <p class="tlbmc-cell__heading tlbmc-cell__heading--green">Outcome-Based Economics</p>
+            <p class="tlbmc-cell__body">Transitioning from seat fees to charging per <strong>&ldquo;Successful Mission&rdquo;</strong> or <strong>&ldquo;Saved Hour&rdquo;</strong> &mdash; directly linking revenue to client ROI.</p>
+          </article>
+
+          <!-- Key Partners -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Political">Pol</span>
+            <span class="tlbmc-cell__label">Key Partners</span>
+            <p class="tlbmc-cell__heading">Infrastructure &amp; Defense</p>
+            <p class="tlbmc-cell__body">AWS and Google for compute scale; <strong>Palantir</strong> for defense-sector distribution to U.S. national security channels.</p>
+          </article>
+
+        </div>
+      </div><!-- /Layer 1 -->
+
+      <!-- ── Layer 2: Environmental ─────────────────────────────────────── -->
+      <div class="tlbmc-layer">
+        <div class="tlbmc-layer__banner">
+          <span class="tlbmc-layer__name tlbmc-layer__name--environ">L2 &mdash; Environmental Layer</span>
+          <div class="tlbmc-layer__pestle-group" aria-label="PESTLE dimensions covered">
+            <span class="pestle-tag">Env</span>
+          </div>
+        </div>
+        <div class="tlbmc-grid">
+
+          <!-- Functional Value -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Environmental">Env</span>
+            <span class="tlbmc-cell__label">Functional Value</span>
+            <p class="tlbmc-cell__heading">Safe Intelligence</p>
+            <p class="tlbmc-cell__body">Providing responsible AI capability while actively managing the <strong>AI-Energy Nexus</strong> &mdash; balancing compute demand with environmental cost visibility.</p>
+          </article>
+
+          <!-- Environmental Impacts -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Environmental">Env</span>
+            <span class="tlbmc-cell__label">Environmental Impacts</span>
+            <p class="tlbmc-cell__heading">Energy &amp; Water Draw</p>
+            <p class="tlbmc-cell__body">1GW+ compute clusters create significant electricity load; water cooling requirements projected at <strong>450M gallons/day by 2030</strong>.</p>
+          </article>
+
+          <!-- Environmental Benefits -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Environmental">Env</span>
+            <span class="tlbmc-cell__label">Environmental Benefits</span>
+            <p class="tlbmc-cell__heading">Edge AI Efficiency</p>
+            <p class="tlbmc-cell__body">Shifting workloads to local devices reduces redundant cloud-compute cycles and lowers per-task <strong>carbon intensity</strong>.</p>
+          </article>
+
+          <!-- Out-sourcing -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Environmental">Env</span>
+            <span class="tlbmc-cell__label">Out-sourcing</span>
+            <p class="tlbmc-cell__heading">Renewable Compute Partners</p>
+            <p class="tlbmc-cell__body">Routing workloads through <strong>$30B Microsoft / Azure</strong> and <strong>Google TPU</strong> deals leverages renewable-heavy data centre infrastructure.</p>
+          </article>
+
+        </div>
+      </div><!-- /Layer 2 -->
+
+      <!-- ── Layer 3: Social Stakeholder ───────────────────────────────── -->
+      <div class="tlbmc-layer">
+        <div class="tlbmc-layer__banner">
+          <span class="tlbmc-layer__name tlbmc-layer__name--social">L3 &mdash; Social Stakeholder Layer</span>
+          <div class="tlbmc-layer__pestle-group" aria-label="PESTLE dimensions covered">
+            <span class="pestle-tag">Soc</span>
+            <span class="pestle-tag">Leg</span>
+          </div>
+        </div>
+        <div class="tlbmc-grid">
+
+          <!-- Social Value -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Social">Soc</span>
+            <span class="tlbmc-cell__label">Social Value</span>
+            <p class="tlbmc-cell__heading">Closing the Trust Gap</p>
+            <p class="tlbmc-cell__body">2 in 3 consumers distrust autonomous AI. Deploying <strong>&ldquo;Helpful, Harmless, and Honest&rdquo;</strong> agents with Digital Provenance directly addresses this deficit.</p>
+          </article>
+
+          <!-- Governance -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Legal">Leg</span>
+            <span class="tlbmc-cell__label">Governance</span>
+            <p class="tlbmc-cell__heading">Structural Oversight</p>
+            <p class="tlbmc-cell__body">EU AI Act compliance built into deployment pipelines; the <strong>Long-Term Benefit Trust</strong> provides independent board oversight against mission drift.</p>
+          </article>
+
+          <!-- Employees -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Social">Soc</span>
+            <span class="tlbmc-cell__label">Employees &amp; Society</span>
+            <p class="tlbmc-cell__heading">Job Crafting, Not Replacement</p>
+            <p class="tlbmc-cell__body">Augmenting white-collar roles (law, finance) impacted by full task delegation &mdash; designing for <strong>human-AI collaboration</strong> rather than displacement.</p>
+          </article>
+
+          <!-- Societal Culture -->
+          <article class="tlbmc-cell">
+            <span class="pestle-tag tlbmc-cell__tag" aria-label="PESTLE: Legal">Leg</span>
+            <span class="tlbmc-cell__label">Societal Culture</span>
+            <p class="tlbmc-cell__heading">PBC as Legal Moat</p>
+            <p class="tlbmc-cell__body">Public Benefit Corporation status enshrines mission in corporate law &mdash; structural protection against reckless scaling pressure from investors.</p>
+          </article>
+
+        </div>
+      </div><!-- /Layer 3 -->
+
+      <!-- Closing quote -->
+      <p class="tlbmc-footer-quote">
+        &ldquo;A business model that is profitable, sustainable, and legally resilient &mdash; the Anthropic triple bottom line.&rdquo;
       </p>
     </div>
   </section>
