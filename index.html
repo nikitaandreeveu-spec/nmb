@@ -975,6 +975,205 @@
       line-height: 1.7;
     }
 
+    /* ─── Section 7: PESTLE Analysis ────────────────────────────────────── */
+    .pestle-dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background-color: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 1023px) {
+      .pestle-dimensions {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .pestle-dimensions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pestle-card {
+      background: var(--surface);
+      padding: 24px;
+      position: relative;
+    }
+
+    .pestle-dimension-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      opacity: 0.45;
+      background: rgba(74, 124, 89, 0.08);
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+
+    .pestle-content {
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .pestle-factor {
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .pestle-response {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .pestle-strategic-takeaway {
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--accent-green);
+      background: rgba(74, 124, 89, 0.05);
+      padding: 24px;
+      border: 1px solid rgba(74, 124, 89, 0.2);
+      border-radius: 4px;
+      margin-top: 32px;
+    }
+
+    /* ─── Section 8: PESTLE-Business Model Impact Matrix ───────────────── */
+    .matrix-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+
+    .matrix-table {
+      display: grid;
+      grid-template-columns: 1fr repeat(5, 1.2fr);
+      gap: 1px;
+      background-color: var(--border);
+      min-width: 900px;
+      padding: 1px;
+    }
+
+    @media (max-width: 1023px) {
+      .matrix-table {
+        grid-template-columns: 1fr repeat(5, 1fr);
+        min-width: 100%;
+      }
+    }
+
+    .matrix-cell {
+      background: var(--surface);
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .matrix-cell.header {
+      background: var(--bg-primary);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      padding: 14px 12px;
+    }
+
+    .matrix-cell.label {
+      background: var(--bg-primary);
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 14px 16px;
+    }
+
+    .matrix-cell.critical {
+      font-size: 20px;
+      color: #E74C3C;
+    }
+
+    .matrix-cell.high {
+      font-size: 20px;
+      color: #E67E22;
+    }
+
+    .matrix-cell.medium {
+      font-size: 20px;
+      color: #F4D03F;
+    }
+
+    .matrix-cell.low {
+      font-size: 20px;
+      color: #27AE60;
+    }
+
+    .matrix-legend {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .legend-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .legend-label {
+      font-weight: 600;
+      white-space: nowrap;
+      min-width: 80px;
+    }
+
+    .legend-text {
+      color: var(--text-primary);
+      opacity: 0.8;
+    }
+
+    .matrix-priorities {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .priority-tier {
+      background: var(--surface);
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .priority-tier:last-child {
+      border-bottom: none;
+    }
+
+    .matrix-footer {
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      padding: 24px;
+      background: rgba(74, 124, 89, 0.05);
+      border: 1px solid var(--border);
+    }
+
   </style>
 </head>
 <body>
@@ -1723,6 +1922,223 @@
       <!-- Closing quote -->
       <p class="tlbmc-footer-quote">
         &ldquo;A business model that is profitable, sustainable, and legally resilient &mdash; the Anthropic triple bottom line.&rdquo;
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 7: PESTLE ANALYSIS ════════════════════════════════════════ -->
+  <section id="pestle-analysis">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">PESTLE Analysis: Anthropic's Strategic Context</h2>
+        <p class="section-subtitle">Six macro-environmental dimensions shaping strategic positioning and business model evolution</p>
+      </div>
+
+      <div class="pestle-dimensions">
+
+        <!-- Political -->
+        <article class="pestle-card">
+          <span class="pestle-dimension-tag">Political (P)</span>
+          <h3 class="card-heading" style="margin-bottom: 14px;">Sovereign AI & Geopolitical Dynamics</h3>
+          <div class="pestle-content">
+            <p class="pestle-factor"><strong>AI Sovereignty:</strong> Governments & big tech demand independence from proprietary vendors</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Anthropic positioned as trusted Western frontier for national security</p>
+          </div>
+          <div class="pestle-content" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <p class="pestle-factor"><strong>Geopolitics:</strong> Restrictions to trade with sanctioned countries</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Compliance infrastructure creates market fragmentation opportunities</p>
+          </div>
+        </article>
+
+        <!-- Economic -->
+        <article class="pestle-card">
+          <span class="pestle-dimension-tag">Economic (E)</span>
+          <h3 class="card-heading" style="margin-bottom: 14px;">Monetization Shift & Market Dynamics</h3>
+          <div class="pestle-content">
+            <p class="pestle-factor"><strong>Monetization Shift:</strong> Moving from seat-based SaaS to outcome-based pricing</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Revenue aligns with customer ROI and measurable outcomes</p>
+          </div>
+          <div class="pestle-content" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <p class="pestle-factor"><strong>Market Acceleration:</strong> Competitive cap-ex reaching $5-30B</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Scale enables sustainable margin expansion via efficiency</p>
+          </div>
+        </article>
+
+        <!-- Social -->
+        <article class="pestle-card">
+          <span class="pestle-dimension-tag">Social (S)</span>
+          <h3 class="card-heading" style="margin-bottom: 14px;">Trust, Labor & Public Perception</h3>
+          <div class="pestle-content">
+            <p class="pestle-factor"><strong>Trust Gap:</strong> Public concerns about data harvesting and copyright</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Transparency becomes competitive advantage</p>
+          </div>
+          <div class="pestle-content" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <p class="pestle-factor"><strong>Labor Concerns:</strong> White-collar job displacement in finance, law, consulting</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ PBC mission enables positioning as ethical alternative</p>
+          </div>
+        </article>
+
+        <!-- Technological -->
+        <article class="pestle-card">
+          <span class="pestle-dimension-tag">Technological (T)</span>
+          <h3 class="card-heading" style="margin-bottom: 14px;">Agentic AI & Computational Efficiency</h3>
+          <div class="pestle-content">
+            <p class="pestle-factor"><strong>Agentic AI:</strong> Only 18% of deployments are "true agents" — massive growth opportunity</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Claude Code: 85% adoption, 45% enterprise coding market share</p>
+          </div>
+          <div class="pestle-content" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <p class="pestle-factor"><strong>Model Efficiency:</strong> 3-4x improvements per generation</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Efficiency decouples costs from capacity scaling</p>
+          </div>
+        </article>
+
+        <!-- Legal -->
+        <article class="pestle-card">
+          <span class="pestle-dimension-tag">Legal (L)</span>
+          <h3 class="card-heading" style="margin-bottom: 14px;">Intellectual Property & International Compliance</h3>
+          <div class="pestle-content">
+            <p class="pestle-factor"><strong>IP & Copyright:</strong> Ongoing litigation on fair use for training data</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Robust data governance and licensing partnerships</p>
+          </div>
+          <div class="pestle-content" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <p class="pestle-factor"><strong>EU AI Act Compliance:</strong> 5-10% operating cost increase</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Regulatory moat — barrier to entry favoring incumbents</p>
+          </div>
+        </article>
+
+        <!-- Environmental -->
+        <article class="pestle-card">
+          <span class="pestle-dimension-tag">Environmental (E)</span>
+          <h3 class="card-heading" style="margin-bottom: 14px;">Energy & Sustainability</h3>
+          <div class="pestle-content">
+            <p class="pestle-factor"><strong>Energy Consumption:</strong> 1GW+ compute clusters, 450M gallons/day water by 2030</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Carbon footprint risk; ESG commitments unlock capital</p>
+          </div>
+          <div class="pestle-content" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <p class="pestle-factor"><strong>Renewable Compute:</strong> Azure &amp; Google TPU renewable infrastructure</p>
+            <p class="pestle-response" style="margin-top: 12px; color: var(--accent-green);">✓ Green AI architectures lower per-unit carbon intensity</p>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="pestle-strategic-takeaway">
+        <strong>Strategic Imperative:</strong> Differentiate as the trusted, efficient, and compliant AI provider for regulated enterprises and sovereign governments through regulatory moats, efficiency optimization, and vertical expansion.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 8: PESTLE-BUSINESS MODEL IMPACT MATRIX ══════════════════ -->
+  <section id="pestle-impact-matrix">
+    <div class="page-wrapper">
+      <div class="section-header">
+        <h2 class="section-title">PESTLE–Business Model Impact Matrix</h2>
+        <p class="section-subtitle">Strategic stress factor mapping and resource prioritization framework</p>
+      </div>
+
+      <div class="matrix-wrapper">
+        <div class="matrix-table">
+          <div class="matrix-cell header">BM Component</div>
+          <div class="matrix-cell header">Geopolitics</div>
+          <div class="matrix-cell header">Labor Concerns</div>
+          <div class="matrix-cell header">Compute Power</div>
+          <div class="matrix-cell header">Regulation</div>
+          <div class="matrix-cell header">Resources</div>
+
+          <!-- Row 1: Key Partnerships -->
+          <div class="matrix-cell label">Key Partnerships</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell critical">🔴</div>
+
+          <!-- Row 2: Value Propositions -->
+          <div class="matrix-cell label">Value Propositions</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell high">🟠</div>
+
+          <!-- Row 3: Key Resources -->
+          <div class="matrix-cell label">Key Resources</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell critical">🔴</div>
+
+          <!-- Row 4: Cost Structure -->
+          <div class="matrix-cell label">Cost Structure</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell medium">🟡</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell critical">🔴</div>
+
+          <!-- Row 5: Revenue Streams -->
+          <div class="matrix-cell label">Revenue Streams</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell critical">🔴</div>
+          <div class="matrix-cell high">🟠</div>
+          <div class="matrix-cell high">🟠</div>
+        </div>
+      </div>
+
+      <div class="matrix-legend">
+        <div class="legend-row">
+          <span class="legend-label">🔴 Critical:</span>
+          <span class="legend-text">Increases OpEx or threatens deployment &mdash; immediate mitigation required</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">🟠 High:</span>
+          <span class="legend-text">Significant strategic implications &mdash; 6-12 month strategy development</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">🟡 Medium:</span>
+          <span class="legend-text">Moderate impact &mdash; optimization over 12+ months</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">🟢 Low:</span>
+          <span class="legend-text">Minimal impact &mdash; addressed through stakeholder engagement</span>
+        </div>
+      </div>
+
+      <div class="matrix-priorities">
+        <div class="priority-tier">
+          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">Tier 1: Critical Impact Mitigation (Immediate)</h4>
+          <ul class="bullet-list">
+            <li><strong>Compute Diversification:</strong> Secure partnerships with Cerebras, Groq; avoid GPU monoculture</li>
+            <li><strong>Geopolitical Alignment:</strong> Establish region-specific partnerships and compliance infrastructure</li>
+            <li><strong>Energy Optimization:</strong> Implement carbon-aware scheduling and renewable energy commitments</li>
+            <li><strong>Revenue Model Redesign:</strong> Transition to outcome-based pricing to align with efficiency gains</li>
+          </ul>
+        </div>
+
+        <div class="priority-tier">
+          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">Tier 2: High-Impact Strategy (6-12 Months)</h4>
+          <ul class="bullet-list">
+            <li><strong>Regulatory Moat:</strong> Build productized compliance evaluation suites (EU AI Act)</li>
+            <li><strong>Labor Narrative:</strong> Develop public communication and transition support programs</li>
+            <li><strong>Vertical Expansion:</strong> Leverage Claude Code success to diversify revenue streams</li>
+            <li><strong>Sustainability Positioning:</strong> Market carbon footprint reduction as premium value proposition</li>
+          </ul>
+        </div>
+
+        <div class="priority-tier">
+          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">Tier 3: Medium-Impact Optimization (12+ Months)</h4>
+          <ul class="bullet-list">
+            <li><strong>Customer Segmentation:</strong> Develop specialized offerings for geopolitically restricted markets</li>
+            <li><strong>Channel Partnerships:</strong> Build network of enterprise integrators with compliance expertise</li>
+            <li><strong>Organizational Scale:</strong> Hire regulatory, compliance, and sustainability specialists</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="matrix-footer">
+        <strong>Success Metrics by 2027:</strong> 5-6x compute efficiency gains · 40%+ reduction in per-unit compute costs · 70%+ enterprise revenue from outcome-based contracts · Multi-region regulatory certifications · Carbon-neutral operations · Sovereign AI partnerships across US, EU, UK, APAC
       </p>
     </div>
   </section>
