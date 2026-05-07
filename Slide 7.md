@@ -1,6 +1,15 @@
 
 # PESTLE Analysis: Anthropic's Strategic Context
 **Design Directive:** Render with **Anthropic Beige (#F5F2ED)** backgrounds and **Safety Green (#4A7C59)** accents for key strategic factors. Use an academic, professional aesthetic with clear hierarchical information design.
+
+## Color Legend - Business Model Impact Assessment
+| Color | Meaning | Impact |
+|:---:|---|---|
+| 🔴 **Red** | No longer feasible | Critical business constraint; immediate strategic restructuring required |
+| 🟠 **Orange** | No longer viable | Significant viability challenges; requires business model adaptation |
+| 🟢 **Green** | Positively influence | Strategic advantage; reinforces competitive positioning |
+| ⚪ **Grey** | No effect | Neutral factor; minimal strategic relevance |
+
 ---
 ## PESTLE Framework Overview
 The PESTLE analysis identifies six macro-environmental dimensions shaping Anthropic's strategic positioning and business model evolution:
